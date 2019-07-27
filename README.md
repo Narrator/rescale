@@ -113,7 +113,7 @@ There's a simple deployment script in the `deploy/` folder called `build-deploy.
 3. Update the the task definitions
 4. Update the services
 
-This script can be integrated into any CI/CD service and can be triggered to run on PR merge to the repository. Here's how to run it:
+This script can be integrated into any CI/CD service and can be triggered to run on PR merge to the repository. Ensure you have the `.env` in the `deploy folder`. Then run it:
 
 ```
 cd deploy
