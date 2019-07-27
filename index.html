@@ -1,0 +1,19 @@
+<!doctype html>
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf-8">
+    var host = '{{socket_uri}}';
+    var socket = io(host);
+    socket.on('connect', () => {
+        socket.on('availability', (statuses) => {
+            statuses.forEach(status => {
+                const provider = status['provider'];
+                document.getElementById(provider).innerHTML = status['availability'];
+            });
+        });
+    });
+</script>
+
+{%for i in range(0, len)%} 
+    {{result[i]['provider']}} - {{result[i]['name']}} : <span id="{{result[i]['provider']}}">Loading...</span>
+    <br/>
+{%endfor%} 

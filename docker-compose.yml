@@ -1,0 +1,61 @@
+version: '3'
+services:
+  rescale-portal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: kausubmab/rescale-hp:local
+    stop_grace_period: 30s
+    networks:
+      - bridge_network
+    depends_on:
+      - rescale-hardware
+    command: ['portal.py']
+    ports:
+      - '80:5000'
+    environment:
+      HARDWARE_HOST: ${HARDWARE_HOST}
+      SOCKET_URI: ${SOCKET_URI}
+    volumes:
+      - ./portal.py:/app/portal.py
+      - ./index.html:/app/index.html
+
+  rescale-hardware:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: kausubmab/rescale-hp:local
+    stop_grace_period: 30s
+    networks:
+      - bridge_network
+    depends_on:
+      - mysql
+    command: ['hardware.py']
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+    volumes:
+      - ./hardware.py:/app/hardware.py
+
+  mysql:
+    image: mysql
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    networks:
+      - bridge_network
+    ports:
+      - '3307:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - 'mysql_data:/var/lib/mysql'
+      - './init-db:/docker-entrypoint-initdb.d'
+
+networks:
+  bridge_network:
+
+volumes:
+  mysql_data:
