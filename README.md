@@ -68,7 +68,30 @@ Add the following resources using the AWS web console:
    * Create Target group for ALB with **Target Type** as **IP**
    * Set health check path to `/health`
    * Add security group allowing connections on port 80 from security group created in above step.
-
+3. MySQL 8 RDS instance in the same VPC created above. It should not be publicly accessible. After launching instance, use a temporary EC2 instance in the same VPC to connect to the DB and run the queries found in `init-db/database.sql`.
+3. Environment variables to Systems Manager - Parameter Store. The following variables need to be added:
+  * /rescale/HARDWARE_HOST - DNS endpoint of internal ALB
+  * /rescale/SOCKET_URI - Full URL to external ALB like so: http://<alb-external-dns-endpoint>
+  * /rescale/DB_HOST - RDS DB endpoint
+  * /rescale/DB_NAME - Name of database
+  * /rescale/DB_USER
+  * /rescale/DB_PASS
+4. Create a role for task execution. This is the role that the tasks would use to pull environment variables from Parameter store. Use this policy:
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameters",
+                "kms:Decrypt"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
 
 To deploy the ECS cluster, first add the following files to the `deploy/` folder using the [Service and Task definitions](#service-and-task-definition-files). Fill in the placeholders with the appropriate resource ARNs of resource created in previous steps:
 ```
