@@ -70,12 +70,12 @@ Add the following resources using the AWS web console:
    * Add security group allowing connections on port 80 from security group created in above step.
 3. MySQL 8 RDS instance in the same VPC created above. It should not be publicly accessible. After launching instance, use a temporary EC2 instance in the same VPC to connect to the DB and run the queries found in `init-db/database.sql`.
 3. Environment variables to Systems Manager - Parameter Store. The following variables need to be added:
-  * /rescale/HARDWARE_HOST - DNS endpoint of internal ALB
-  * /rescale/SOCKET_URI - Full URL to external ALB like so: http://<alb-external-dns-endpoint>
-  * /rescale/DB_HOST - RDS DB endpoint
-  * /rescale/DB_NAME - Name of database
-  * /rescale/DB_USER
-  * /rescale/DB_PASS
+    * /rescale/HARDWARE_HOST - DNS endpoint of internal ALB
+    * /rescale/SOCKET_URI - Full URL to external ALB like so: http://endpoint.alb-some-address.com
+    * /rescale/DB_HOST - RDS DB endpoint
+    * /rescale/DB_NAME - Name of database
+    * /rescale/DB_USER
+    * /rescale/DB_PASS
 4. Create a role for task execution. This is the role that the tasks would use to pull environment variables from Parameter store. Use this policy:
 ```json
 {
