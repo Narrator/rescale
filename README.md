@@ -70,7 +70,7 @@ Add the following resources using the AWS web console:
    * Add security group allowing connections on port 80 from security group created in above step.
 
 
-To deploy the ECS cluster, first add the following files to the `deploy/` folder using the [Service and Task definitions](service-and-task-definition-files). Fill in the placeholders with the appropriate resource ARNs of resource created in previous steps:
+To deploy the ECS cluster, first add the following files to the `deploy/` folder using the [Service and Task definitions](#service-and-task-definition-files). Fill in the placeholders with the appropriate resource ARNs of resource created in previous steps:
 ```
 deploy/portal-task.json
 deploy/hardware-task.json
