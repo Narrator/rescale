@@ -299,6 +299,9 @@ I've included screenshots from the AWS web console below:
 ### EC2
 ![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/EC2.png "EC2 Instances")
 
+### RDS
+![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/RDS.png "RDS instance")
+
 
 
 
