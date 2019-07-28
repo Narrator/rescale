@@ -6,6 +6,7 @@ Micro "microservices" Deployment
 2. [Deploy first time](#deploy)
 3. [Future deployments](#future-deployments)
 4. [Service and Task definition files](service-and-task-definition-files)
+5. [Infrastructure Overview](#infrastructure-overview)
 
 ## Run Locally
 
@@ -262,3 +263,43 @@ The Hardware service definition file:
     }
 }
 ```
+
+## Infrastructure Overview
+
+![alt text](https://www.lucidchart.com/publicSegments/view/4b2d7e2e-246c-42a2-aadf-a0033918a531/image.png "AWS ECS Infrastucture")
+
+1. The public ECS Cluster can be accessed through the internet facing ALB
+2. The private ECS cluster can be accessed through the internal ALB (Only resources within the VPC and satisfying the security group constraints can access this ALB)
+3. The hardware service runs inside the private cluster
+4. The portal UI runs inside the public cluster
+
+I've included screenshots from the AWS web console below:
+
+### ECS Dashboard
+![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/ECS-dashboard.png "ECS Dashboard")
+
+### Portal Task
+![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/Portal-task.png "Portal UI Task")
+
+### Hardware Task
+![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/hardware-task.png "Hardware Task")
+
+### ALBs
+![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/ALBs.png "Application Load Balancers")
+
+### Target Groups
+![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/TGs.png "Target Groups")
+
+### ASGs
+![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/ASGs.png "Auto-Scaling Groups")
+
+### EC2
+![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/Sgs.png "Security Groups")
+
+### EC2
+![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/EC2.png "EC2 Instances")
+
+
+
+
+
