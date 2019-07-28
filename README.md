@@ -293,7 +293,7 @@ I've included screenshots from the AWS web console below:
 ### ASGs
 ![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/ASGs.png "Auto-Scaling Groups")
 
-### EC2
+### Security Groups
 ![alt text](https://rescale-kaushik.s3.us-east-2.amazonaws.com/Sgs.png "Security Groups")
 
 ### EC2
