@@ -1,6 +1,6 @@
 # Rescale
 
-Micro "microservices" Deployment
+Micro "microservices" Deployment. You can access the actual finished project here: http://ecs-alb-1228458198.us-east-2.elb.amazonaws.com
 
 1. [Run Locally](#run-locally)
 2. [Deploy first time](#deploy)
